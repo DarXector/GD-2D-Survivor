@@ -1,23 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://mlkn0moxu6ro"]
+[gd_scene load_steps=11 format=3 uid="uid://mlkn0moxu6ro"]
 
 [ext_resource type="PackedScene" uid="uid://utsxo8uey0s0" path="res://scenes/ui/arena_time_ui.tscn" id="1_2gxak"]
 [ext_resource type="PackedScene" uid="uid://cndlnaw3syms2" path="res://scenes/game_object/game_camera/game_camera.tscn" id="1_agxk0"]
 [ext_resource type="TileSet" uid="uid://dyp52ypxwgr30" path="res://resources/tile_set.tres" id="1_e6kbj"]
 [ext_resource type="PackedScene" uid="uid://bxn12vcoc73w7" path="res://scenes/game_object/player/player.tscn" id="1_hacwi"]
 [ext_resource type="PackedScene" uid="uid://6lhoodpv0jcs" path="res://scenes/manager/arena_time_manager.tscn" id="2_7wa2w"]
+[ext_resource type="PackedScene" uid="uid://bah6wwo7g18y7" path="res://scenes/ui/experience_bar.tscn" id="2_sjo7l"]
 [ext_resource type="PackedScene" uid="uid://b4vatq7hpukhh" path="res://scenes/manager/experience_manager.tscn" id="3_y2tas"]
 [ext_resource type="PackedScene" uid="uid://bt2oqg8pcbyve" path="res://scenes/manager/enemy_manager.tscn" id="4_n2jwk"]
+[ext_resource type="PackedScene" uid="uid://bi1pe8clx7wmm" path="res://scenes/manager/upgade_manager.tscn" id="6_dukxj"]
+[ext_resource type="Resource" uid="uid://dkjjuqgmkqqpn" path="res://resources/upgrades/sword_rate.tres" id="7_3hyoc"]
 
 [node name="Main" type="Node"]
 
 [node name="ArenaTimeUI" parent="." node_paths=PackedStringArray("arena_time_manager") instance=ExtResource("1_2gxak")]
 arena_time_manager = NodePath("../ArenaTimeManager")
 
+[node name="ExperienceBar" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("2_sjo7l")]
+experience_manager = NodePath("../ExperienceManager")
+
 [node name="ArenaTimeManager" parent="." instance=ExtResource("2_7wa2w")]
 
 [node name="ExperienceManager" parent="." instance=ExtResource("3_y2tas")]
 
 [node name="EnemyManager" parent="." instance=ExtResource("4_n2jwk")]
+
+[node name="UpgadeManager" parent="." node_paths=PackedStringArray("experience_manager") instance=ExtResource("6_dukxj")]
+upgrade_pool = Array[Resource("res://resources/upgrades/ability_upgrade.gd")]([ExtResource("7_3hyoc")])
+experience_manager = NodePath("../ExperienceManager")
 
 [node name="Camera2D" parent="." instance=ExtResource("1_agxk0")]
 
