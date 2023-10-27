@@ -2,20 +2,28 @@ extends Node
 class_name HealthComponent
 
 signal died()
+signal health_changed()
 
 @export var max_health = 10
 
-var current_healt
+var current_health
 
 func _ready():
-	current_healt = max_health
+	current_health = max_health
 
 func damage(amount:float):
-	current_healt = max(current_healt - amount, 0)
+	current_health = max(current_health - amount, 0)
+	health_changed.emit(get_health_percent())
 	Callable(check_death).call_deferred()
 
 
+func get_health_percent():
+	if max_health == 0:
+		return 0
+	return min(current_health / max_health, 1)
+
+
 func check_death():
-	if current_healt == 0:
+	if current_health == 0:
 		died.emit()
 		owner.queue_free()
