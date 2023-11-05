@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://cp6ygv4c6xxby"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://cp6ygv4c6xxby"]
 
+[ext_resource type="PackedScene" uid="uid://bpvdfumgju6hn" path="res://scenes/abilities/axe_ability/axe_ability_controller.tscn" id="1_1nhjb"]
 [ext_resource type="Script" path="res://resources/upgrades/ability.gd" id="1_i05he"]
 
 [resource]
 script = ExtResource("1_i05he")
-id = ""
-name = ""
-description = ""
+ability_controller_scene = ExtResource("1_1nhjb")
+id = "axe"
+name = "Flying Axe"
+description = "Add Flying Axe as a weapon"
 max_level = 1
 level = 0
