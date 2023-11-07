@@ -27,3 +27,7 @@ func accelerate_to_player():
 	
 	var direction = (player.global_position - owner_node2d.global_position).normalized()
 	accelerate_in_direction(direction)
+
+
+func decelerate():
+	accelerate_in_direction(Vector2.ZERO)
