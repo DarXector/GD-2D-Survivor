@@ -3,7 +3,8 @@ extends Node
 @export var max_range = 150
 @export var sword_ability: PackedScene
 
-var damage = 5
+var base_damage = 5
+var additional_damage_percent = 1
 var base_wait_time
 
 # Called when the node enters the scene tree for the first time.
@@ -32,7 +33,7 @@ func on_timer_timeout():
 	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer") as Node2D
 	var sword_instance = sword_ability.instantiate() as SwordAbility
 	foreground_layer.add_child(sword_instance)
-	sword_instance.hitbox_component.damage = damage
+	sword_instance.hitbox_component.damage = base_damage * additional_damage_percent
 	
 	var enemy = enemies[0] as Node2D
 	
@@ -47,8 +48,8 @@ func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Diction
 	if upgrade.id == "sword_rate":
 		$Timer.wait_time = base_wait_time * (1 - upgrade.level * 0.1)
 		$Timer.start()
-	# elif upgrade.id == "sword_damage":
-	# 	damage = 5 + upgrade.level * 5
+	elif upgrade.id == "sword_damage":
+		additional_damage_percent = 1 + upgrade.level * 0.15
 	# elif upgrade.id == "sword_range":
 	# 	max_range = 150 + upgrade.level * 50
 	# elif upgrade.id == "sword_count":
