@@ -1,7 +1,17 @@
 extends CanvasLayer
 
 
+@onready var panel_conrainer = $%PanelContainer
+
+
 func _ready():
+	panel_conrainer.pivot_offset = panel_conrainer.size / 2
+
+	var tween = create_tween()
+	tween.tween_property(panel_conrainer, "scale", Vector2.ZERO, 0)
+	tween.tween_property(panel_conrainer, "scale", Vector2.ONE, 0.3)\
+	.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+
 	get_tree().paused = true
 	$%RestartButton.pressed.connect(on_restart_pressed)
 	$%QuitButton.pressed.connect(on_quit_pressed)
