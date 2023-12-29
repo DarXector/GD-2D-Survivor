@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxn12vcoc73w7"]
+[gd_scene load_steps=14 format=3 uid="uid://bxn12vcoc73w7"]
 
 [ext_resource type="Texture2D" uid="uid://bxeyr4n8lvqr3" path="res://scenes/game_object/player/player.png" id="1_2sefg"]
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_sgrh8"]
+[ext_resource type="PackedScene" uid="uid://6wldee8mw2ar" path="res://scenes/component/velocity_component.tscn" id="2_d0q1w"]
 [ext_resource type="PackedScene" uid="uid://jelxhpocxv4t" path="res://scenes/abilities/sword_ability/sword_ability_controller.tscn" id="2_gh0vc"]
 [ext_resource type="PackedScene" uid="uid://b6mo610mw1lh5" path="res://scenes/component/health_component.tscn" id="2_ryd3j"]
 
@@ -115,6 +116,10 @@ radius = 7.0
 collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_sgrh8")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_d0q1w")]
+max_speed = 90
+acceleration = 25
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

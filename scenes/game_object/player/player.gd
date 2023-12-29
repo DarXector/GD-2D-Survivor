@@ -9,10 +9,13 @@ const ACCELERATION_SMOOTHING = 25
 @onready var abilities = $Abilities
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
+@onready var velocity_component = $VelocityComponent
 
 var number_colliding_bodies = 0
+var base_speed = 0
 
 func _ready():
+	base_speed = velocity_component.max_speed
 	$CollisionArea2D.body_entered.connect(on_body_entered)
 	$CollisionArea2D.body_exited.connect(on_body_exited)
 	damage_interval_timer.timeout.connect(on_damage_interval_timer_timeout)
@@ -24,10 +27,8 @@ func _ready():
 func _process(delta):
 	var movement_vector = get_movement_vector()
 	var direction = movement_vector.normalized()
-	var target_velocity = direction * MAX_SPEED
-	
-	velocity = velocity.lerp(target_velocity, 1 - exp(-delta * ACCELERATION_SMOOTHING))
-	move_and_slide()
+	velocity_component.accelerate_in_direction(direction)
+	velocity_component.move(self)
 
 	if movement_vector.x > 0:
 		sprite.flip_h = false
@@ -71,9 +72,16 @@ func on_damage_interval_timer_timeout():
 
 
 func on_health_changed(new_health: float):
+	GameEvents.emit_player_damaged()
 	update_health_display(new_health)
 
 
 func on_ability_upgrade_added(ability_upgrade: AbilityUpgrade, current_upgrades: Dictionary):
 	if ability_upgrade is Ability:
 		abilities.add_child(ability_upgrade.ability_controller_scene.instantiate())
+	elif ability_upgrade.id == "player_speed":
+		velocity_component.max_speed = base_speed + (current_upgrades["player_speed"]["level"] * 0.1) * base_speed
+	# elif ability_upgrade.id == "player_health":
+	# 	health_component.max_health = ability_upgrade.value
+	# 	health_component.current_health = ability_upgrade.value
+	# 	update_health_display(health_component.get_health_percent())

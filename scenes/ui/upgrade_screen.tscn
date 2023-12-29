@@ -3,6 +3,21 @@
 [ext_resource type="Script" path="res://scenes/ui/upgrade_screen.gd" id="1_d4v21"]
 [ext_resource type="PackedScene" uid="uid://bfdjnvgy851b4" path="res://scenes/ui/ability_upgrade_card.tscn" id="1_t1ban"]
 
+[sub_resource type="Animation" id="Animation_ku1lp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_n0vta"]
 resource_name = "in"
 length = 0.15
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_ku1lp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_q5536"]
@@ -65,10 +65,10 @@ script = ExtResource("1_d4v21")
 upgrade_card_scene = ExtResource("1_t1ban")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "in"
 libraries = {
 "": SubResource("AnimationLibrary_eyqv4")
 }
+autoplay = "in"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
