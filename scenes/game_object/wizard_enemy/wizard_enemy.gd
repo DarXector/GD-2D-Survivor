@@ -5,6 +5,9 @@ extends CharacterBody2D
 
 var is_moving = false
 
+func _ready():
+	$HurtBoxComponent.hit.connect(on_hit)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_moving:
@@ -22,3 +25,8 @@ func _process(delta):
 
 func set_is_moving(moving):
 	is_moving = moving
+
+
+
+func on_hit():
+	$HitRandomAudioPlayer2DComponent.play_random()

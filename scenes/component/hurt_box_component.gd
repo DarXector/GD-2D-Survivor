@@ -1,6 +1,7 @@
 extends Area2D
 class_name HurtBoxComponent
 
+signal hit
 
 @export var health_cpomoenent: Node
 
@@ -26,3 +27,5 @@ func ona_area_entered(other_area:Area2D):
 	if round(hit_box_cpomonent.damage) == hit_box_cpomonent.damage:
 		format_string = "%0.0f"
 	floating_text.start(format_string % hit_box_cpomonent.damage)
+
+	hit.emit()

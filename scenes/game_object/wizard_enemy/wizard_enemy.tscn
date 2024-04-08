@@ -1,13 +1,19 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkqqrtr6n0241"]
+[gd_scene load_steps=22 format=3 uid="uid://dkqqrtr6n0241"]
 
 [ext_resource type="Script" path="res://scenes/game_object/wizard_enemy/wizard_enemy.gd" id="1_c5dk6"]
 [ext_resource type="PackedScene" uid="uid://b6mo610mw1lh5" path="res://scenes/component/health_component.tscn" id="1_m6xnd"]
 [ext_resource type="Texture2D" uid="uid://fetknew2ap5x" path="res://scenes/game_object/wizard_enemy/wizard_enemy.png" id="2_005d7"]
+[ext_resource type="PackedScene" uid="uid://bnv44p7pbs7aa" path="res://scenes/component/random_stream_player_2d_component.tscn" id="2_6k0rc"]
 [ext_resource type="PackedScene" uid="uid://6wldee8mw2ar" path="res://scenes/component/velocity_component.tscn" id="2_kyqeg"]
 [ext_resource type="PackedScene" uid="uid://yvj3madfnady" path="res://scenes/component/death_component.tscn" id="2_qt0fk"]
+[ext_resource type="AudioStream" uid="uid://c4xha5jbcq0cf" path="res://assets/audio/footstep_carpet_000.ogg" id="3_l8pu4"]
+[ext_resource type="AudioStream" uid="uid://c1g45dkq23kcx" path="res://assets/audio/footstep_carpet_001.ogg" id="4_kvie3"]
 [ext_resource type="PackedScene" uid="uid://bl3gea7i8t3yo" path="res://scenes/component/hurt_box_component.tscn" id="4_l2rij"]
 [ext_resource type="PackedScene" uid="uid://cau4n55vu4oai" path="res://scenes/component/hit_flash_component.tscn" id="5_21bbv"]
+[ext_resource type="AudioStream" uid="uid://1j253fk7rhsi" path="res://assets/audio/footstep_carpet_002.ogg" id="5_r61ua"]
 [ext_resource type="Shader" path="res://scenes/component/hit_flash_component.gdshader" id="6_enpkl"]
+[ext_resource type="AudioStream" uid="uid://bdrdf6n53xgvx" path="res://assets/audio/footstep_carpet_003.ogg" id="6_n3cor"]
+[ext_resource type="AudioStream" uid="uid://ohwu4lm6gc7c" path="res://assets/audio/footstep_carpet_004.ogg" id="7_aajbx"]
 [ext_resource type="PackedScene" uid="uid://d25t687e1c1sr" path="res://scenes/component/vial_drop_component.tscn" id="7_yqelf"]
 
 [sub_resource type="Animation" id="Animation_a0lpy"]
@@ -131,10 +137,13 @@ collision_mask = 9
 script = ExtResource("1_c5dk6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "walk"
 libraries = {
 "": SubResource("AnimationLibrary_7sh4n")
 }
+autoplay = "walk"
+
+[node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("2_6k0rc")]
+streams = Array[AudioStream]([ExtResource("3_l8pu4"), ExtResource("4_kvie3"), ExtResource("5_r61ua"), ExtResource("6_n3cor"), ExtResource("7_aajbx")])
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_m6xnd")]
 max_health = 30

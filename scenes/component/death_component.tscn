@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://yvj3madfnady"]
+[gd_scene load_steps=15 format=3 uid="uid://yvj3madfnady"]
 
 [ext_resource type="Script" path="res://scenes/component/death_component.gd" id="1_p5ysx"]
 [ext_resource type="Texture2D" uid="uid://10kk2p5c7yce" path="res://scenes/game_object/basic_enemy/basic_enemy.png" id="1_r80mr"]
+[ext_resource type="PackedScene" uid="uid://bnv44p7pbs7aa" path="res://scenes/component/random_stream_player_2d_component.tscn" id="2_ypjcr"]
+[ext_resource type="AudioStream" uid="uid://c4xha5jbcq0cf" path="res://assets/audio/footstep_carpet_000.ogg" id="3_7l466"]
+[ext_resource type="AudioStream" uid="uid://c1g45dkq23kcx" path="res://assets/audio/footstep_carpet_001.ogg" id="4_u5qus"]
+[ext_resource type="AudioStream" uid="uid://1j253fk7rhsi" path="res://assets/audio/footstep_carpet_002.ogg" id="5_sl77g"]
+[ext_resource type="AudioStream" uid="uid://bdrdf6n53xgvx" path="res://assets/audio/footstep_carpet_003.ogg" id="6_155kt"]
+[ext_resource type="AudioStream" uid="uid://ohwu4lm6gc7c" path="res://assets/audio/footstep_carpet_004.ogg" id="7_pvr8v"]
 
 [sub_resource type="Animation" id="Animation_rnaeo"]
 length = 0.001
@@ -64,13 +70,11 @@ curve = SubResource("Curve_7buya")
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
 spread = 30.0
-gravity = Vector3(0, 800, 0)
 initial_velocity_min = 175.0
 initial_velocity_max = 250.0
 angular_velocity_min = -1080.0
 angular_velocity_max = 1080.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 800, 0)
 scale_curve = SubResource("CurveTexture_keaoy")
 
 [node name="DeathComponent" type="Node2D"]
@@ -80,6 +84,9 @@ script = ExtResource("1_p5ysx")
 libraries = {
 "": SubResource("AnimationLibrary_13dl6")
 }
+
+[node name="HitRandomAudioPlayer2DComponent" parent="." instance=ExtResource("2_ypjcr")]
+streams = Array[AudioStream]([ExtResource("3_7l466"), ExtResource("4_u5qus"), ExtResource("5_sl77g"), ExtResource("6_155kt"), ExtResource("7_pvr8v")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
